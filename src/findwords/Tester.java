@@ -39,7 +39,9 @@ public class Tester {
         tester.testEqual("binder", "binding", 4);
         tester.testEqual("binder", "binding", 5);
         tester.testEqual("bind", "bind", 5);
+        tester.testEqual("test", "test", 0);
 
+        /*
         tester.testLessThan("binary", "bind", 4);
         tester.testLessThan("binder", "binding", 4);
         tester.testLessThan("binding", "binder", 4);
@@ -50,5 +52,6 @@ public class Tester {
         tester.testFindPrefix("bi..r.", 2);
 
         tester.testFindMatches("bi..r.");
+        */
     }
 }

@@ -18,7 +18,15 @@ public class Searcher {
      */
     public boolean equal(String s, String t, int n) {
         // replace the following line with your implementation
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(s.length() < n || t.length() < n){
+            return true;
+        }
+        for(int i = 0; i < n; i++){
+            if(s.charAt(i) != t.charAt(i)){
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
