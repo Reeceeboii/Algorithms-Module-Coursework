@@ -2,6 +2,7 @@ package findwords;
 
 import java.util.ArrayList;
 
+
 /**
  * Your implementation of the coursework.
  * This is the only source file you should modify, and the only one you
@@ -17,16 +18,24 @@ public class Searcher {
      * @return true if s and t are equal up to the first n characters
      */
     public boolean equal(String s, String t, int n) {
-        // replace the following line with your implementation
         if(s.length() < n || t.length() < n){
             return true;
         }
+
+        // invariant: 0 <= i < n and s[i] == t[i]
         for(int i = 0; i < n; i++){
             if(s.charAt(i) != t.charAt(i)){
                 return false;
             }
         }
         return true;
+    }
+
+    private String findShortest(String s, String t){
+        if(s.length() < t.length()) {
+            return s;
+        }
+        return t;
     }
 
     /**
@@ -37,8 +46,19 @@ public class Searcher {
      * @return true if s is less than t in the first n characters
      */
     public boolean lessThan(String s, String t, int n) {
-        // replace the following line with your implementation
-        throw new UnsupportedOperationException("Not supported yet.");
+        if(!(s.length() < n) || (t.length() < n)){
+            // invariant i <= 0 < n and s[i] == t[i]
+            for(int i = 0; i < n; i++){
+                if(s.charAt(i) != t.charAt(i)){
+                    return s.charAt(i) < t.charAt(i);
+                }
+            }
+            // in this case, i = n and no case for s[i] != t[i] has been found; equality in all chars <= n
+            return false;
+        }
+        // any inputs where n is larger than either input
+        // TODO got here
+        return false;
     }
 
     /**
