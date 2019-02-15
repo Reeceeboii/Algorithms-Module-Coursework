@@ -31,8 +31,10 @@ public class Searcher {
         return true;
     }
 
+    // returns the shortest of the two words
     private String findShortest(String s, String t){
         if(s.length() < t.length()) {
+            System.out.println(s.length());
             return s;
         }
         return t;
@@ -56,9 +58,20 @@ public class Searcher {
             // in this case, i = n and no case for s[i] != t[i] has been found; equality in all chars <= n
             return false;
         }
-        // any inputs where n is larger than either input
-        // TODO got here
-        return false;
+        // any inputs where n is larger than either of the inputs
+        if(findShortest(s, t).equals(s)){
+            if(equal(s, t, s.length()-1)){
+                return true; // if s is the shortest and is equal to t for all its characters
+            }else{
+                for(int i = 0; i < s.length()-1; i++){
+                    if(s.charAt(i) != t.charAt(i)){
+                        return s.charAt(i) < t.charAt(i);
+                    }
+                }
+            }
+        }
+        //t is the shortest
+        return t.charAt(t.length()-1) < s.charAt(t.length()-1);
     }
 
     /**
