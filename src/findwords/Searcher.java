@@ -1,6 +1,7 @@
 package findwords;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 
 /**
@@ -19,7 +20,15 @@ public class Searcher {
      */
     public boolean equal(String s, String t, int n) {
         if(s.length() < n || t.length() < n){
-            return true;
+            if(s.length() == t.length()){
+                for(int i = 0; i < s.length(); i++){
+                    if(s.charAt(i) != t.charAt(i)){
+                        return false;
+                    }
+                }
+                return true;
+            }
+            return false;
         }
 
         // invariant: 0 <= i < n and s[i] == t[i]
@@ -31,13 +40,11 @@ public class Searcher {
         return true;
     }
 
-    // returns the shortest of the two words
-    private String findShortest(String s, String t){
-        if(s.length() < t.length()) {
-            System.out.println(s.length());
-            return s;
+    public int lengthOfShortestInput(String s, String t){
+        if(s.length() < t.length()){
+            return s.length();
         }
-        return t;
+        return t.length();
     }
 
     /**
@@ -48,30 +55,24 @@ public class Searcher {
      * @return true if s is less than t in the first n characters
      */
     public boolean lessThan(String s, String t, int n) {
-        if(!(s.length() < n) || (t.length() < n)){
-            // invariant i <= 0 < n and s[i] == t[i]
-            for(int i = 0; i < n; i++){
+        if(!(s.length() < n || t.length() < n)){
+            if(equal(s, t, n)){
+                return false;
+            }
+            for(int i = 0; i < lengthOfShortestInput(s, t); i++){
                 if(s.charAt(i) != t.charAt(i)){
                     return s.charAt(i) < t.charAt(i);
                 }
             }
-            // in this case, i = n and no case for s[i] != t[i] has been found; equality in all chars <= n
-            return false;
+
         }
-        // any inputs where n is larger than either of the inputs
-        if(findShortest(s, t).equals(s)){
-            if(equal(s, t, s.length()-1)){
-                return true; // if s is the shortest and is equal to t for all its characters
-            }else{
-                for(int i = 0; i < s.length()-1; i++){
-                    if(s.charAt(i) != t.charAt(i)){
-                        return s.charAt(i) < t.charAt(i);
-                    }
-                }
+        //if either is shorter...
+        for(int i = 0; i < lengthOfShortestInput(s, t); i++){
+            if(s.charAt(i) != t.charAt(i)){
+                return s.charAt(i) < t.charAt(i);
             }
         }
-        //t is the shortest
-        return t.charAt(t.length()-1) < s.charAt(t.length()-1);
+        return true;
     }
 
     /**

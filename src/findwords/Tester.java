@@ -37,9 +37,9 @@ public class Tester {
         Tester tester = new Tester();
 
         //tester.testEqual("binder", "binding", 4);
-        //tester.testEqual("binder", "binding", 5);
-        //tester.testEqual("bind", "bind", 5);
-        //tester.testEqual("bit", "binary", 4);
+       // tester.testEqual("binder", "binding", 8);
+       // tester.testEqual("bind", "bind", 5);
+       // tester.testEqual("bit", "binary", 5);
 
 
         tester.testLessThan("binary", "bind", 4);
@@ -48,7 +48,11 @@ public class Tester {
         tester.testLessThan("bin", "binary", 4);
         tester.testLessThan("bit", "binary", 4);
 
-        /*
+        tester.testLessThan("alphabetti", "spaghetti", 4);
+        tester.testLessThan("spaghetti", "alphabetti", 4);
+
+
+    /*
         tester.testFindPrefix("bi", 2);
         tester.testFindPrefix("bi..r.", 2);
 
