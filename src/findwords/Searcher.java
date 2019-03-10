@@ -66,8 +66,7 @@ public class Searcher {
             }
 
         }
-        //if either is shorter...
-        for(int i = 0; i < lengthOfShortestInput(s, t); i++){
+         for(int i = 0; i < lengthOfShortestInput(s, t); i++){
             if(s.charAt(i) != t.charAt(i)){
                 return s.charAt(i) < t.charAt(i);
             }
@@ -85,7 +84,18 @@ public class Searcher {
      */
     public int findPrefix(Dictionary d, String w, int n) {
         // replace the following line with your implementation
-        throw new UnsupportedOperationException("Not supported yet.");
+        int low = 0;
+        int high = d.size() - 1;
+
+        while(low < high){
+            int mid = (low + high) / 2;
+            if(lessThan(d.getWord(mid), w, n)){
+                low = mid + 1;
+            }else{
+                high = mid - 1;
+            }
+        }
+        return low;
     }
 
     /**

@@ -42,21 +42,20 @@ public class Tester {
        // tester.testEqual("bit", "binary", 5);
 
 
-        tester.testLessThan("binary", "bind", 4);
-        tester.testLessThan("binder", "binding", 4);
-        tester.testLessThan("binding", "binder", 4);
-        tester.testLessThan("bin", "binary", 4);
-        tester.testLessThan("bit", "binary", 4);
+       // tester.testLessThan("binary", "bind", 4);
+     //   tester.testLessThan("binder", "binding", 4);
+      //  tester.testLessThan("binding", "binder", 4);
+     //   tester.testLessThan("bin", "binary", 4);
+      //  tester.testLessThan("bit", "binary", 4);
 
-        tester.testLessThan("alphabetti", "spaghetti", 4);
-        tester.testLessThan("spaghetti", "alphabetti", 4);
+      //  tester.testLessThan("alphabetti", "spaghetti", 4);
+       // tester.testLessThan("spaghetti", "alphabetti", 4);
 
 
-    /*
+
         tester.testFindPrefix("bi", 2);
         tester.testFindPrefix("bi..r.", 2);
 
-        tester.testFindMatches("bi..r.");
-        */
+        //tester.testFindMatches("bi..r.");
     }
 }
