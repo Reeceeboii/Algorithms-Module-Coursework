@@ -52,10 +52,26 @@ public class Tester {
        // tester.testLessThan("spaghetti", "alphabetti", 4);
 
 
+        /*
+        tester.testFindPrefix("..cidentally", 3);
+        tester.testFindPrefix("..cidentally", 2);
+        tester.testFindPrefix("..cidentally", 12);
 
-        tester.testFindPrefix("bi", 2);
-        tester.testFindPrefix("bi..r.", 2);
 
-        //tester.testFindMatches("bi..r.");
+        tester.testFindPrefix ("bi", 2);
+        tester.testFindPrefix ("bi..r.", 2);
+        tester.testFindPrefix ("ac", 2);
+        tester.testFindPrefix ("ab.....s", 2);
+        tester.testFindPrefix ("ab.....s", 8);
+        tester.testFindPrefix ("abalones", 8);
+        tester.testFindPrefix ("abaft", 5);
+        tester.testFindPrefix ("a...t", 1);
+        tester.testFindPrefix ("zygotes", 7);
+        tester.testFindPrefix ("accidentally", 12);
+        tester.testFindPrefix ("ac.........y", 12);
+        */
+
+
+        tester.testFindMatches("bi..r.");
     }
 }

@@ -2,6 +2,8 @@ package findwords;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 /**
@@ -59,12 +61,6 @@ public class Searcher {
             if(equal(s, t, n)){
                 return false;
             }
-            for(int i = 0; i < lengthOfShortestInput(s, t); i++){
-                if(s.charAt(i) != t.charAt(i)){
-                    return s.charAt(i) < t.charAt(i);
-                }
-            }
-
         }
          for(int i = 0; i < lengthOfShortestInput(s, t); i++){
             if(s.charAt(i) != t.charAt(i)){
@@ -106,7 +102,27 @@ public class Searcher {
      */
     public ArrayList<String> findMatches(Dictionary d, String clue) {
         ArrayList<String> matches = new ArrayList<>();
-        // fill in your implementation here to add to matches here
+
+        Pattern p = Pattern.compile(clue);
+
+        int indexForPrefixCheck = 0;
+        for(int i = 0; i < clue.length(); i++){
+            if(clue.charAt(i) != '.'){
+                indexForPrefixCheck = i + 1;
+            }else{
+                break;
+            }
+        }
+        int indexOfFirstMatch = findPrefix(d, clue, indexForPrefixCheck) + 1;
+
+        for(int i = indexOfFirstMatch; i < indexOfFirstMatch + 1000; i++){
+            String word = d.getWord(i);
+            if(p.matcher(word).matches()){
+                matches.add(word);
+            }
+        }
+
+        //System.out.println(d.getWord(findPrefix(d, clue, )));
         return matches;
     }
     
