@@ -84,7 +84,7 @@ public class Searcher {
         int low = 0;
         int high = d.size() - 1;
 
-        while(low < high){
+        while(low <= high){
             int mid = (low + high) / 2;
             if(lessThan(d.getWord(mid), w, n)){
                 low = mid + 1;
@@ -104,26 +104,26 @@ public class Searcher {
     public ArrayList<String> findMatches(Dictionary d, String clue) {
         ArrayList<String> matches = new ArrayList<>();
 
-        Pattern p = Pattern.compile(clue);
-
-        int indexForPrefixCheck = 0;
-        for(int i = 0; i < clue.length(); i++){
-            if(clue.charAt(i) != '.'){
-                indexForPrefixCheck = i + 1;
-            }else{
+        int prefix = clue.length();
+        for(int character = 0; character < prefix; character++){
+            if(clue.charAt(character) == '.'){
+                prefix = character;
                 break;
             }
         }
-        int indexOfFirstMatch = findPrefix(d, clue, indexForPrefixCheck) + 1;
 
-        for(int i = indexOfFirstMatch; i < indexOfFirstMatch + 1000; i++){
-            String word = d.getWord(i);
-            if(p.matcher(word).matches()){
-                matches.add(word);
+        for(int i = findPrefix(d, clue, prefix); i < d.size(); i++){
+            String wordToCompare = d.getWord(i);
+            boolean assumeMatch = true;
+            if(wordToCompare.length() == clue.length()){
+                for(int j = 0; j < clue.length(); j++){
+                    if(wordToCompare.charAt(j) != clue.charAt(j) && clue.charAt(j) != '.'){
+                        assumeMatch = false;
+                    }
+                }
+                if(assumeMatch) matches.add(wordToCompare);
             }
         }
-
-        //System.out.println(d.getWord(findPrefix(d, clue, )));
         return matches;
     }
     

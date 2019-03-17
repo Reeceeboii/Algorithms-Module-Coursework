@@ -41,17 +41,19 @@ public class Tester {
        // tester.testEqual("bind", "bind", 5);
        // tester.testEqual("bit", "binary", 5);
 
-
+        /*
         tester.testLessThan("binary", "bind", 4);
         tester.testLessThan("binder", "binding", 4);
         tester.testLessThan("binding", "binder", 4);
         tester.testLessThan("bin", "binary", 4);
         tester.testLessThan("binary", "bin", 4);
         tester.testLessThan("bit", "binary", 4);
+        */
 
-      //  tester.testLessThan("alphabetti", "spaghetti", 4);
-       // tester.testLessThan("spaghetti", "alphabetti", 4);
-
+        /*
+        tester.testLessThan("alphabetti", "spaghetti", 4);
+        tester.testLessThan("spaghetti", "alphabetti", 4);
+        */
 
         /*
         tester.testFindPrefix("..cidentally", 3);
@@ -73,6 +75,11 @@ public class Tester {
         */
 
 
-        //tester.testFindMatches("bi..r.");
+        tester.testFindMatches("bike.s");
+        tester.testFindMatches("bikers");
+        tester.testFindMatches("act...");
+        tester.testFindMatches("m..s.");
+
+
     }
 }
