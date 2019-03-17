@@ -23,6 +23,7 @@ public class Searcher {
     public boolean equal(String s, String t, int n) {
         if(s.length() < n || t.length() < n){
             if(s.length() == t.length()){
+                // invariant: i < length of s and s[i] == t[i]
                 for(int i = 0; i < s.length(); i++){
                     if(s.charAt(i) != t.charAt(i)){
                         return false;
@@ -42,6 +43,7 @@ public class Searcher {
         return true;
     }
 
+    // my own method, returns the length of the shortest of the two input strings
     public int lengthOfShortestInput(String s, String t){
         if(s.length() < t.length()){
             return s.length();
@@ -57,17 +59,16 @@ public class Searcher {
      * @return true if s is less than t in the first n characters
      */
     public boolean lessThan(String s, String t, int n) {
-        if(!(s.length() < n || t.length() < n)){
-            if(equal(s, t, n)){
-                return false;
+        for (int i = 0; i < n; i++) {
+            try{
+                if(s.charAt(i) != t.charAt(i)){
+                    return s.charAt(i) < t.charAt(i);
+                }
+            }catch(IndexOutOfBoundsException exc){
+                return t.length() > s.length();
             }
         }
-         for(int i = 0; i < lengthOfShortestInput(s, t); i++){
-            if(s.charAt(i) != t.charAt(i)){
-                return s.charAt(i) < t.charAt(i);
-            }
-        }
-        return true;
+        return !equal(s, t, n);
     }
 
     /**
