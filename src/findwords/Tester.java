@@ -78,7 +78,8 @@ public class Tester {
         tester.testFindMatches("bike.s");
         tester.testFindMatches("bikers");
         tester.testFindMatches("act...");
-        tester.testFindMatches("m..s.");
+        tester.testFindMatches("m..st");
+        tester.testFindMatches("..f.");
 
 
     }

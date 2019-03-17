@@ -43,14 +43,6 @@ public class Searcher {
         return true;
     }
 
-    // my own method, returns the length of the shortest of the two input strings
-    public int lengthOfShortestInput(String s, String t){
-        if(s.length() < t.length()){
-            return s.length();
-        }
-        return t.length();
-    }
-
     /**
      * Compare the front part of two character arrays.
      * @param s the first character array
@@ -59,6 +51,7 @@ public class Searcher {
      * @return true if s is less than t in the first n characters
      */
     public boolean lessThan(String s, String t, int n) {
+        // invariant: 0 < i < n and s[i] == t[i] and s and t have not been indexed out of range
         for (int i = 0; i < n; i++) {
             try{
                 if(s.charAt(i) != t.charAt(i)){
@@ -81,18 +74,19 @@ public class Searcher {
      */
     public int findPrefix(Dictionary d, String w, int n) {
         // replace the following line with your implementation
-        int low = 0;
-        int high = d.size() - 1;
+        int lowerBound = 0;
+        int higherBound = d.size() - 1;
 
-        while(low <= high){
-            int mid = (low + high) / 2;
+        // invariant: lowerbound less than or equal to higherbound
+        while(lowerBound <= higherBound){
+            int mid = (lowerBound + higherBound) / 2;
             if(lessThan(d.getWord(mid), w, n)){
-                low = mid + 1;
+                lowerBound = mid + 1;
             }else{
-                high = mid - 1;
+                higherBound = mid - 1;
             }
         }
-        return low;
+        return lowerBound;
     }
 
     /**
@@ -105,6 +99,7 @@ public class Searcher {
         ArrayList<String> matches = new ArrayList<>();
 
         int prefix = clue.length();
+        // invariant: character
         for(int character = 0; character < prefix; character++){
             if(clue.charAt(character) == '.'){
                 prefix = character;
@@ -112,18 +107,48 @@ public class Searcher {
             }
         }
 
+        System.out.println("prefix " + prefix);
+
+        int calls = 0;
+        // invariant: findPrefix(d,clue,prefix) < i < dict.size()
         for(int i = findPrefix(d, clue, prefix); i < d.size(); i++){
-            String wordToCompare = d.getWord(i);
-            boolean assumeMatch = true;
-            if(wordToCompare.length() == clue.length()){
-                for(int j = 0; j < clue.length(); j++){
-                    if(wordToCompare.charAt(j) != clue.charAt(j) && clue.charAt(j) != '.'){
-                        assumeMatch = false;
+            if(prefix > 0){
+                String wordToCompare = d.getWord(i);
+                calls++;
+                boolean assumeMatch = true;
+                if(equal(wordToCompare, clue, prefix)){
+                    if(wordToCompare.length() == clue.length()){
+                        // invariant: j < clue.length()
+                        for(int j = 0; j < clue.length(); j++){
+                            if(wordToCompare.charAt(j) != clue.charAt(j) && clue.charAt(j) != '.'){
+                                assumeMatch = false;
+                            }
+                        }
+                        if(assumeMatch) matches.add(wordToCompare);
+                    }
+                }else{
+                    break;
+                }
+            }else {
+                // invariant: i < d.size()
+                for (i = findPrefix(d, clue, prefix); i < d.size(); i++) {
+                    String wordToCompare = d.getWord(i);
+                    calls++;
+                    boolean assumeMatch = true;
+                    if (wordToCompare.length() == clue.length()) {
+                        // invariant: j < clue.length()
+                        for (int j = 0; j < clue.length(); j++) {
+                            if (wordToCompare.charAt(j) != clue.charAt(j) && clue.charAt(j) != '.') {
+                                assumeMatch = false;
+                            }
+                        }
+                        if (assumeMatch) matches.add(wordToCompare);
                     }
                 }
-                if(assumeMatch) matches.add(wordToCompare);
             }
         }
+
+        System.out.println(clue + " called getword " + calls + " times");
         return matches;
     }
     
