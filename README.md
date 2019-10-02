@@ -4,4 +4,4 @@ We were given a large word dictionary and were tasked in implementing efficient 
 
 So say, given pattern `bi..r.`, the program would search the dictionary and output words such as `bikers`, `binary` and `bistro`. We had to optimise our methods to make as few dictionary accesses as possible.
 
-For the programming side of this coursework, I received 100% of the markk.
+For the programming side of this coursework, I received 100% of the marks.
